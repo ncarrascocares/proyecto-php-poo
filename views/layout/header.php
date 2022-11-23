@@ -23,12 +23,12 @@
     <!-- MENU -->
     <nav id="menu">
         <ul>
-            <li>Inicio</li>
-            <li>Categoria 1</li>
-            <li>Categoria 2</li>
-            <li>Categoria 3</li>
-            <li>Categoria 4</li>
-            <li>Categoria 5</li>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Categoria 1</a></li>
+            <li><a href="#">Categoria 2</a></li>
+            <li><a href="#">Categoria 3</a></li>
+            <li><a href="#">Categoria 4</a></li>
+            <li><a href="#">Categoria 5</a></li>
         </ul>
     </nav>
     

@@ -13,9 +13,19 @@
             <h3><?=$_SESSION['identity']->nombre." ".$_SESSION['identity']->apellidos?></h3>
         <?php endif;?>
         <ul>
-            <li><a href="#">Mis pedidos</a></li>
-            <li><a href="#">Gestionar pedidos</a></li>
+            
+            <!-- Validación para mostrar opciones en caso de login de un usuario admin -->
+            <?php if(isset($_SESSION['admin'])):?>
+            <li><a href="#">Gestionar Pedidos</a></li>
+            <li><a href="#">Gestionar Productos</a></li>
             <li><a href="#">Gestionar Categorias</a></li>
+            <?php endif; ?>
+
+            <!-- Opciones que apareceran solo si se reaiza un login -->
+            <?php if(isset($_SESSION['identity'])):?>
+            <li><a href="#">Mis pedidos</a></li>
+            <li><a href="<?=base_url?>usuario/logout">Cerrar Sesión</a></li>
+            <?php endif;?>
         </ul>
     </div>
 </aside>

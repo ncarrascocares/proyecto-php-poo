@@ -31,7 +31,7 @@
             return $this->email;
         }
         function getPassword(){
-            return $this->password;
+            return password_hash($this->db->real_escape_string($this->password),PASSWORD_BCRYPT, ['cos=>4']);
         }
         function getRol(){
             return $this->rol;
@@ -54,7 +54,7 @@
             $this->email = $this->db->real_escape_string($email);
         }
         function setPassword($password){
-            $this->password = password_hash($this->db->real_escape_string($password),PASSWORD_BCRYPT, ['cos=>4']);
+            $this->password = $password;
         }
         function setRol($rol){
             $this->rol = $rol;
@@ -74,6 +74,28 @@
 
             return $result;
 
+        }
+
+        public function login(){
+            $result = false;
+
+            //1. Comprobar si existe el usuario
+            $sql = "SELECT * FROM usuarios WHERE email = '{$this->email}'";
+            
+            $login = $this->db->query($sql);
+
+            if ($login && $login->num_rows == 1) {
+                $usuario = $login->fetch_object();
+
+                //Verificación de la contraseña
+                $verificacion = password_verify($this->password, $usuario->password);
+               
+                if ($verificacion) {
+                    $result = $usuario;
+                }
+            }
+
+            return $result;
         }
 
 

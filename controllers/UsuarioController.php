@@ -50,4 +50,32 @@ class UsuarioController
 
         header("Location:" . base_url . "/usuario/registro");
     }
+
+    #Método para realizar el logeo de los usuarios
+    public function login(){
+        if($_POST){
+            //Instancia de un objeto de la clase Uusario
+            $usuario = new Usuario();
+            //1. Asignando los valores recibidos desde el formulario a los métodos seteadores de la clase Usuario
+            $usuario->setEmail($_POST['email']);
+            $usuario->setPassword($_POST['password']);
+
+            //2. Imbocando al método que realiza la consula a la base de datos
+            $identity = $usuario->login();
+           
+            //3. Crear sesion
+            if ($identity && is_object($identity)) {
+                $_SESSION['identity'] = $identity;
+
+                if ($identity->role == 'admin') {
+                    $_SESSION['admin'] = true;
+                }
+            }else{
+                $_SESSION['error_login'] = "Identificacion fallida";
+            }
+            
+        }
+
+        header("Location:".base_url);
+    }
 }

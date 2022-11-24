@@ -24,7 +24,7 @@
     <?php $categorias = Utils::showCategorias(); ?>
     <nav id="menu">
         <ul>
-            <li><a href="#">Inicio</a></li>
+            <li><a href="<?=base_url?>">Inicio</a></li>
             
             <!-- Recorriendo la tabla de categorias y mostrando en la cabeceras -->
             <?php while($cat = $categorias->fetch_object()):?>

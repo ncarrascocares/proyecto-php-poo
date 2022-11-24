@@ -26,6 +26,13 @@
             $categorias = $objeto->getCategorias();
             return $categorias;
         }
+
+        public static function showProductos(){
+            require_once 'models/Producto.php';
+            $objeto = new Producto();
+            $productos=$objeto->getAll();
+            return $productos;
+        }
     }
 
 

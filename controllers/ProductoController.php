@@ -21,17 +21,38 @@
 
         public function save(){
             Utils::isAdmin();
-            if($_POST){
-               
-                $objeto = new Producto();
-                $objeto->setCategioria_id($_POST['categoria']);
-                $objeto->setNombre($_POST['nombre']);
-                $objeto->setDescripcion($_POST['descripcion']);
-                $objeto->setPrecio($_POST['precio']);
-                $objeto->setStock($_POST['precio']);
-                $objeto->setOferta($_POST['oferta']);
+            if(isset($_POST)){
                 
-                $objeto->save();
+                $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+                $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
+                $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
+                $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
+                $oferta = isset($_POST['oferta']) ? $_POST['oferta'] : false;
+                $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : "NULL";
+
+                //Validando que las variables no sean false
+                if($categoria && $nombre && $descripcion && $precio && $stock && $oferta){
+                    $objeto = new Producto();
+                    $objeto->setCategioria_id($categoria);
+                    $objeto->setNombre($nombre);
+                    $objeto->setDescripcion($descripcion);
+                    $objeto->setPrecio($precio);
+                    $objeto->setStock($stock);
+                    $objeto->setOferta($oferta);
+                    $objeto->setImagen($imagen);
+                
+                    $save = $objeto->save();
+                    if($save){
+                        $_SESSION['producto'] = "Complete";
+                    }else{
+                        $_SESSION['producto'] = "failed";
+                    }
+                }else{
+                    $_SESSION['producto'] = "failed";
+                }
+            }else{
+                $_SESSION['producto'] = "failed";
             }
 
             header("Location:".base_url."producto/gestion");

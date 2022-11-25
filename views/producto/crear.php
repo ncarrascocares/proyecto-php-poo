@@ -16,6 +16,7 @@
     <input type="number" name="stock" required>
     <label for="oferta">Oferta</label>
     <input type="text" name="oferta" required>
-    
+    <label for="imagen">Imagen</label>
+    <input type="file" name="imagen">
     <input type="submit" value="Guardar">
 </form>

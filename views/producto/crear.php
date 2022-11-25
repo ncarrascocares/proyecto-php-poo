@@ -1,6 +1,6 @@
 <h1>Crear nuevo Producto</h1>
 <?php $categorias = Utils::showCategorias(); ?>
-<form action="<?= base_url ?>producto/save" method="post">
+<form action="<?= base_url ?>producto/save" method="post" enctype="multipart/form-data">
     <select name="categoria" id="">
     <?php while($cat = $categorias->fetch_object()):?>
         <option value="<?=$cat->id?>"><?=$cat->nombre?></option>

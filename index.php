@@ -28,10 +28,15 @@ if (class_exists($nombre_controlador)) {
     $controlador = new $nombre_controlador();
     
     //Forma dinamica
-    if (isset($_GET['action']) && method_exists($controlador, $_GET['action'])) {
+    if (isset($_GET['action']) && isset($_GET['id']) && method_exists($controlador, $_GET['action'])) {
+        $action = $_GET['action'];
+        $id = (int)$_GET['id'];
+        $controlador->$action($id);
+
+    }elseif(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
         $action = $_GET['action'];
         $controlador->$action();
-       
+        
     }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
         $default = action_default;
         $controlador->$default();

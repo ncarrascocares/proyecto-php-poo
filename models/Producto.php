@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 require_once 'config/db.php';
     class Producto{
 
@@ -96,6 +99,17 @@ require_once 'config/db.php';
 
             return $result;
             
+        }
+
+        public function delete(){
+            $result = false;
+            $sql = "DELETE FROM productos WHERE id = '{$this->getId()}';";
+            $delete = $this->db->query($sql);
+            if ($delete) {
+                $result = true;
+            }
+
+            return $result;
         }
 
 

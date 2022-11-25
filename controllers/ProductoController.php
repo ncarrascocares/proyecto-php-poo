@@ -19,6 +19,35 @@
            require_once 'views/producto/crear.php';
         }
 
+        public function editar(){
+
+        }
+
+        public function eliminar(){
+            Utils::isAdmin();
+            if($_GET){
+                // var_dump($_GET);
+                // die();
+                $id = isset($_GET['id']) ? $_GET['id'] : false;
+
+                if ($id) {
+                    $objeto = new Producto();
+                    $objeto->setId($id);
+                    $delete = $objeto->delete();
+
+                    if ($delete) {
+                        $_SESSION['delete'] = 'delete_complete';
+                    }
+                }else{
+                    $_SESSION['delete'] = 'delete_failed';
+                }
+            }else{
+                $_SESSION['delete'] = 'delete_failed';
+            }
+            
+            header("Location:".base_url."producto/gestion");
+        }
+
         public function save(){
             Utils::isAdmin();
             if(isset($_POST)){

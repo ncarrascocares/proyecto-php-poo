@@ -36,7 +36,7 @@
         <!-- <td><//?=$pro->fecha;?></td>
         <td><//?=$pro->imagen;?></td> -->
         <td>
-            <a class="button button-gestion" style="text-decoration: none;" href="<?=base_url?>producto/editar">Editar</a>
+            <a class="button button-gestion" style="text-decoration: none;" href="<?=base_url?>producto/editar/<?=$pro->id?>">Editar</a>
             <a class="button button-red" style="text-decoration: none;" href="<?=base_url?>producto/eliminar/<?=$pro->id?>">Eliminar</a>
         </td>
     </tr>

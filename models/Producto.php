@@ -112,6 +112,34 @@ require_once 'config/db.php';
             return $result;
         }
 
+        public function getOne(){
+            $producto = $this->db->query("SELECT * FROM productos WHERE id = {$this->getId()};");
+          
+            return $producto->fetch_object();
+        }
+
+        public function edit(){
+            $result = false;
+            $sql = "UPDATE productos 
+                    SET nombre      = '{$this->getNombre()}', 
+                        descripcion = '{$this->getDescripcion()}',
+                        precio      = {$this->getPrecio()},
+                        stock       = {$this->getStock()},  
+                        oferta      = '{$this->getOferta()}',
+                       CURDATE() ";
+                        if ($this->getImagen() != null) {
+                            $sql .= ",imagen = '{$this->getImagen()}"; 
+                        }
+                        $sql .= "WHERE id = {$this->getId()};";
+                       
+            $update = $this->db->query($sql);
+            if ($update) {
+                $result = true;
+            }
+
+            return $result;
+        }
+
 
     }
 

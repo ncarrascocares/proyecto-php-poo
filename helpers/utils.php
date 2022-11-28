@@ -33,6 +33,22 @@
             $productos=$objeto->getAll();
             return $productos;
         }
+
+        public static function statsCarrito(){
+            $stats = array(
+                'count' => 0,
+                'total' => 0
+            );
+
+            if(isset($_SESSION['carrito'])){
+                $stats['count'] = count($_SESSION['carrito']);
+                foreach ($_SESSION['carrito'] as $elemento) {
+                    $stats['total'] += $elemento['precio']*$elemento['unidades'];
+                }
+            }
+
+            return $stats;
+        }
     }
 
 

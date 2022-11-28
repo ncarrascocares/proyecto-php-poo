@@ -26,7 +26,7 @@
 
         //Metodos set
         function setId($id){
-            $this->id = $id;
+            $this->id = (int)$this->db->real_escape_string($id);
         }
         function setNombre($nombre){
             $this->nombre = $this->db->real_escape_string($nombre);
@@ -35,6 +35,11 @@
         public function getCategorias(){
             $categorias = $this->db->query("SELECT * FROM categorias ORDER BY id DESC;");
             return $categorias;
+        }
+
+        public function getOne(){
+            $categoria = $this->db->query("SELECT * FROM categorias WHERE id = {$this->getId()} ORDER BY id DESC;");
+            return $categoria->fetch_object();
         }
 
         public function save(){

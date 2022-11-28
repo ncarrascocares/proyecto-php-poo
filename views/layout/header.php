@@ -28,7 +28,7 @@
             
             <!-- Recorriendo la tabla de categorias y mostrando en la cabeceras -->
             <?php while($cat = $categorias->fetch_object()):?>
-            <li><a href="#"><?=$cat->nombre?></a></li>
+            <li><a href="<?=base_url?>categoria/ver<?=$cat->id ?>"> <?=$cat->nombre?></a></li>
             <?php endwhile; ?>
 
         </ul>

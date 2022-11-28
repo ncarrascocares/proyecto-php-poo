@@ -55,7 +55,7 @@ require_once 'config/db.php';
         function setId($id){
             $this->id = $id;
         }
-        function setCategioria_id($categoria){
+        function setCategoria_id($categoria){
             $this->categoria_id = (int)$this->db->real_escape_string($categoria);
         }
         function setNombre($nombre){
@@ -83,6 +83,16 @@ require_once 'config/db.php';
         //Método para obtener todos los datos de la bd
         public function getAll(){
             $productos = $this->db->query("SELECT * FROM productos ORDER BY id DESC;");
+            return $productos;
+        }
+
+        public function getAllxCategoria(){
+            $sql = " SELECT p.*, c.nombre as 'catnombre' FROM productos p 
+                     INNER JOIN categorias c ON c.id = p.categoria_id
+                     WHERE p.categoria_id = {$this->getCategoria_id()}
+                     ORDER BY id DESC;
+            ";
+            $productos = $this->db->query($sql);
             return $productos;
         }
 
@@ -139,6 +149,11 @@ require_once 'config/db.php';
             }
 
             return $result;
+        }
+
+        public function getRandom($limit){
+            $productos = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT {$limit};");
+            return $productos;
         }
 
 

@@ -53,7 +53,7 @@ require_once 'config/db.php';
 
         //Métodos set
         function setId($id){
-            $this->id = $id;
+            $this->id = (int)$this->db->real_escape_string($id);
         }
         function setCategoria_id($categoria){
             $this->categoria_id = (int)$this->db->real_escape_string($categoria);

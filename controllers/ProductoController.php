@@ -81,7 +81,7 @@
                 //Validando que las variables no sean false
                 if($categoria && $nombre && $descripcion && $precio && $stock && $oferta){
                     $objeto = new Producto();
-                    $objeto->setCategioria_id($categoria);
+                    $objeto->setCategoria_id($categoria);
                     $objeto->setNombre($nombre);
                     $objeto->setDescripcion($descripcion);
                     $objeto->setPrecio($precio);
@@ -125,6 +125,20 @@
             }
 
             header("Location:".base_url."producto/gestion");
+        }
+
+        public function ver(){
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                
+                $producto = new Producto();
+                $producto->setId($id);
+
+                $pro = $producto->getOne();
+                
+            }
+
+            require_once 'views/producto/ver.php';
         }
     }
 

@@ -1,19 +1,14 @@
+<!-- La variablea editar y pro vienen desde el método editar del controlador ProductoController -->
 <?php if (isset($editar) && isset($pro) && is_object($pro)):?>
     <h1>Editar Producto <span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><?=$pro->nombre?></span></h1>
+    <?php $ruta = base_url."producto/save".$pro->id; ?>
 <?php else:?>
     <h1>Crear nuevo Producto</h1>
+    <?php $ruta = $ruta = base_url."producto/save"; ?>
 <?php endif;?>
 
-<?php 
-    if (isset($editar)) {
-        $ruta = base_url."producto/save/".$pro->id;
-    }else{
-        $ruta = base_url."producto/save";
-    }
-?>
-
 <?php $categorias = Utils::showCategorias(); ?>
-<form action="<?=$ruta?>" method="post" enctype="multipart/form-data">
+<form action="<?=$ruta?>" method="POST" enctype="multipart/form-data">
     <?php if(isset($editar) && isset($pro)): ?>
     <input type="hidden" name="" value="<?=$pro->id?>">
     <?php endif;?>

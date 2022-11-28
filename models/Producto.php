@@ -1,6 +1,6 @@
 <?php
 
-use LDAP\Result;
+//use LDAP\Result;
 
 require_once 'config/db.php';
     class Producto{
@@ -121,17 +121,18 @@ require_once 'config/db.php';
         public function edit(){
             $result = false;
             $sql = "UPDATE productos 
-                    SET nombre      = '{$this->getNombre()}', 
-                        descripcion = '{$this->getDescripcion()}',
-                        precio      = {$this->getPrecio()},
-                        stock       = {$this->getStock()},  
-                        oferta      = '{$this->getOferta()}',
-                       CURDATE() ";
+                    SET categoria_id   = {$this->getCategoria_id()},  
+                        nombre         = '{$this->getNombre()}',
+                        descripcion    = '{$this->getDescripcion()}',
+                        precio         =  {$this->getPrecio()},
+                        stock          =  {$this->getStock()},  
+                        oferta         =  '{$this->getOferta()}'";
                         if ($this->getImagen() != null) {
-                            $sql .= ",imagen = '{$this->getImagen()}"; 
+                            $sql .= ",imagen = '{$this->getImagen()}'"; 
                         }
-                        $sql .= "WHERE id = {$this->getId()};";
-                       
+                        $sql .= " WHERE id = {$this->getId()};";
+                        // echo $sql;
+                        // die();                     
             $update = $this->db->query($sql);
             if ($update) {
                 $result = true;

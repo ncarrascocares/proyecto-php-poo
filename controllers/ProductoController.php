@@ -64,13 +64,16 @@
             Utils::isAdmin();
             if(isset($_POST)){
                 
+                //$accion = isset($_GET['id'])? true:false;
                 $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
                 $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
                 $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
                 $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
                 $oferta = isset($_POST['oferta']) ? $_POST['oferta'] : false;
-                //$imagen = isset($_POST['imagen']) ? $_POST['imagen'] : "NULL";
+                
+
+               
 
                 //Validando que las variables no sean false
                 if($categoria && $nombre && $descripcion && $precio && $stock && $oferta){
@@ -83,7 +86,7 @@
                     $objeto->setOferta($oferta);
 
                     //Guardar imagen
-                    if (isset($_FILES['imagen'])) {
+                    if (isset($_FILES['imagen']) && $_FILES['imagen'] != "") {
                         $file = $_FILES['imagen'];
                         $filename = $file['name'];
                         $mimetype = $file['type'];
@@ -91,25 +94,20 @@
                         if ($mimetype == "image/jpg" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "image/gif") {
                             if (!is_dir('uploads/imagenes')) {
                                 mkdir('uploads/imagenes', 0777, true);
-                            }
-    
-                            
+                            }    
                             $objeto->setImagen($filename);
                             move_uploaded_file($file['tmp_name'],'uploads/imagenes/'.$filename);
                         }
                     }
-                   
-                    if (isset($_GET['id'])) {
-                        $id = $_GET['id'];
-                        $objeto->setId($id);
-                        $edit = $objeto->edit();
-                    }else{
+
+                    if(isset($_GET['id']) && ($_GET['id']) != ""){
+                        $id = $_GET['id'];                     
+                        $objeto->setId($id);   
+                        $save = $objeto->edit();
+                        
+                    }elseif(empty($_GET['id'])){
                         $save = $objeto->save();
                     }
-                    
-
-
-
 
                     if($save){
                         $_SESSION['producto'] = "Complete";

@@ -28,7 +28,7 @@
             <?php if (isset($_SESSION['admin'])) : ?>
                 <li><a style="text-decoration: none;" href="<?= base_url ?>categoria/index">Gestionar Categorias</a></li>
                 <li><a style="text-decoration: none;" href="<?= base_url ?>producto/gestion">Gestionar Productos</a></li>
-                <li><a style="text-decoration: none;" href="#">Gestionar Pedidos</a></li>
+                <li><a style="text-decoration: none;" href="<?= base_url ?>carrito/index">Gestionar Pedidos</a></li>
             <?php endif; ?>
 
             <!-- Opciones que apareceran solo si se reaiza un login -->

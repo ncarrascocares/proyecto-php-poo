@@ -6,7 +6,10 @@
             <?php $stats = Utils::statsCarrito(); ?>
             <li><a style="text-decoration: none;" href="<?= base_url ?>carrito/index">Productos: <?=$stats['count'];?></a></li>
             <li><a style="text-decoration: none;" href="<?= base_url ?>carrito/index">Total: $<?=$stats['total'];?></a></li>
+            <?php if(isset($_SESSION['carrito'])): ?>
             <li><a style="text-decoration: none;" href="<?= base_url ?>carrito/index">Ver el carrito</a></li>
+            <li><a style="text-decoration: none;" href="<?=base_url?>usuario/vaciar">Vaciar carrito</a></li>
+            <?php endif;?>
         </ul>
     </div>
     <div id="login" class="block-aside">
@@ -28,12 +31,12 @@
             <?php if (isset($_SESSION['admin'])) : ?>
                 <li><a style="text-decoration: none;" href="<?= base_url ?>categoria/index">Gestionar Categorias</a></li>
                 <li><a style="text-decoration: none;" href="<?= base_url ?>producto/gestion">Gestionar Productos</a></li>
-                <li><a style="text-decoration: none;" href="<?= base_url ?>carrito/index">Gestionar Pedidos</a></li>
+                <li><a style="text-decoration: none;" href="<?= base_url ?>pedido/gestion">Gestionar Pedidos</a></li>
             <?php endif; ?>
 
             <!-- Opciones que apareceran solo si se reaiza un login -->
             <?php if (isset($_SESSION['identity'])) : ?>
-                <li><a style="text-decoration: none;" href="#">Mis pedidos</a></li>
+                <li><a style="text-decoration: none;" href="<?= base_url ?>pedido/pedidos">Mis pedidos</a></li>
                 <li><a style="text-decoration: none;" href="<?= base_url ?>usuario/logout">Cerrar Sesión</a></li>
                 <!-- Opcion que aparecera a usuarios no sin perfil creado -->
             <?php else : ?>

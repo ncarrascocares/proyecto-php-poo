@@ -52,7 +52,23 @@ require_once 'models/Pedido.php';
         }
 
         public function confirmado(){
+            if (isset($_SESSION['identity'])) {
+                $identity = $_SESSION['identity'];
+                $objeto = new Pedido();
+                $objeto->setUsuario_id($identity->id);
+                
+                $pedido = $objeto->getOneByUser();
+
+                //Obteniendo datos desde la tabla linea_pedido
+                $pedido_productos = new Pedido();
+                $productos = $pedido_productos->getProductosByPedido($pedido->id);
+            }
+            
             require_once 'views/pedido/confirmado.php';
+        }
+
+        public function pedidos(){
+            require_once 'views/pedido/mis_pedidos.php';
         }
        
     }

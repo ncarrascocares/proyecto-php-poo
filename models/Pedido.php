@@ -130,6 +130,24 @@ require_once 'config/db.php';
           
             return $pedidos->fetch_object();
         }
+        public function getOneByUser(){
+            $sql = "SELECT p.id, p.coste, lp.unidades FROM pedidos p"
+                  ." INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id"
+                  ." WHERE p.usuario_id = {$this->getUsuario_id()} ORDER BY id DESC LIMIT 1;";
+            $pedidos = $this->db->query($sql);
+          
+            return $pedidos->fetch_object();
+        }
+        public function getProductosByPedido($id){
+            $sql = "SELECT pr.*, lp.unidades FROM productos pr "
+                  ."INNER JOIN lineas_pedidos lp ON pr.id = lp.producto_id "
+                  ."WHERE lp.pedido_id = {$id};";
+
+                //   echo $sql;
+                //   die();
+            $productos = $this->db->query($sql);
+            return $productos;
+        }
 
     }
 

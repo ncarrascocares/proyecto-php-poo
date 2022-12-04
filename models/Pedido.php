@@ -130,6 +130,7 @@ require_once 'config/db.php';
           
             return $pedidos->fetch_object();
         }
+        //Consulta que saca el ultimo pedido de un usuario
         public function getOneByUser(){
             $sql = "SELECT p.id, p.coste, lp.unidades FROM pedidos p"
                   ." INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id"
@@ -137,6 +138,14 @@ require_once 'config/db.php';
             $pedidos = $this->db->query($sql);
           
             return $pedidos->fetch_object();
+        }
+        //Consulta que saca todos los pedidos de un usuario
+        public function getAllByUser(){
+            $sql = "SELECT p.* FROM pedidos p"
+                  ." WHERE p.usuario_id = {$this->getUsuario_id()} ORDER BY id DESC;";
+            $pedidos = $this->db->query($sql);
+          
+            return $pedidos;
         }
         public function getProductosByPedido($id){
             $sql = "SELECT pr.*, lp.unidades FROM productos pr "

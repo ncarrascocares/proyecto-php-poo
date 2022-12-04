@@ -68,6 +68,16 @@ require_once 'models/Pedido.php';
         }
 
         public function pedidos(){
+
+            //Utilizando el metodo verficador de logeo del fichero Utils
+            Utils::isIdentity();
+            $usuario_id = $_SESSION['identity']->id;
+            $objeto = new Pedido();
+
+            //Sacando los pedidos del usuario desde el modelo
+            $objeto->setUsuario_id($usuario_id);
+            $pedidos = $objeto->getAllByUser();
+
             require_once 'views/pedido/mis_pedidos.php';
         }
        

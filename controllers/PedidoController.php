@@ -80,6 +80,28 @@ require_once 'models/Pedido.php';
 
             require_once 'views/pedido/mis_pedidos.php';
         }
+
+        public function detalle(){
+            //Utilizando el metodo verficador de logeo del fichero Utils
+            Utils::isIdentity();
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+
+                //Sacar el pedido
+                $objeto = new Pedido();
+                $objeto->setId($id);
+                $pedido = $objeto->getOne();
+
+                //Sacar los productos
+                $pedido_productos = new Pedido();
+                $productos = $pedido_productos->getProductosByPedido($id);
+
+                require_once 'views/pedido/detalle.php';
+            }else{
+                header("Location:".base_url."pedido/pedidos");
+            }
+            
+        }
        
     }
 
